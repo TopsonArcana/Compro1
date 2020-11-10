@@ -14,8 +14,8 @@ class Board:
     def __read_board(self, filename):
         celllist = []
         f = open(filename, "r")
-        self.__width = f.readline().strip()
-        self.__length = f.readline().strip()
+        self.__width = int(f.readline().strip())
+        self.__length = int(f.readline().strip())
         for i in f.readlines():
             celllist.append(Cell(i.split(",")[0], i.split(",")[1], i.split(",")[2].strip()))
         return celllist
@@ -34,7 +34,7 @@ class Board:
 
     def get_winner(self):
         if self.check_winner():
-            return "Game Over. {0} wins".format(self.access_cell(self.cell_list[-1].id).occupy_list[0].name)
+            return "Game Over! {0} wins".format(self.access_cell(self.cell_list[-1].id).occupy_list[0].name)
         else:
             return None
 
@@ -48,8 +48,10 @@ class Board:
             self.access_cell(player.current_pos).add_occupy_list(player)
 
     def __str__(self):
-        return "".join(["""
-- - - - - - - -
-|      {0:3}     |
-|   {1:3}, {2:5} |
-|     {3:4}     |""".format(i.id, i.move, i.hold, i.get_occupy_list_str()) for i in self.__cell_list])
+        display = []
+        for row in range(self.__length):
+            display.append("- - - - - - - - " * self.__width)
+            display.append("".join([f"|      {i.id:3}     |" for i in self.__cell_list[self.__width*row:self.__width*(row+1)]]))
+            display.append("".join([f"|   {i.move:3},{i.hold:5}  |" for i in self.__cell_list[self.__width*row:self.__width*(row+1)]]))
+            display.append("".join([f"|      {i.get_occupy_list_str():3}     |" for i in self.__cell_list[self.__width*row:self.__width*(row+1)]]))
+        return "\n".join(display)
