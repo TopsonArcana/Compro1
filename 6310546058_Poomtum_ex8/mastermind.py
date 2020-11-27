@@ -29,12 +29,17 @@ class Player:
         >>> g = Game()
         >>> len(g.number)
         4
+        >>> g.number = "2113"
+        >>> p.check("1231",g)
+        'oooo'
         >>> p.check(g.number,g)
         '****'
         """
+        temp = [i for i in game.number]
         self.progress = ""
         for i in range(len(guess)):
-            if guess[i] in game.number:
+            if guess[i] in temp:
+                temp.remove(guess[i])
                 if guess[i] == game.number[i]:
                     self.progress += "*"
                 else:
