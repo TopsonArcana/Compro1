@@ -1,5 +1,5 @@
 from player import *
-from board import *
+from Board import *
 from cell import *
 a = Player('A')
 b = Player('B')

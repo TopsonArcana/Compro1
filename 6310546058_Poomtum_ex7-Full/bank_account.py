@@ -18,7 +18,7 @@ def search(account_ID):
 
 # deposit an amount to a given bank account ID
 def deposit(account_ID, amount):
-    if search(account_ID) == True:
+    if search(account_ID):
         bank_account_DB[account_ID][1] += amount
     else:
         print('Record not found.')

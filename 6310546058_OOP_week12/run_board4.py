@@ -2,7 +2,7 @@ from Board import *
 from player import *
 import random
 
-board = Board('board3.txt')
+board = Board('board1.txt')
 a = Player('A')
 b = Player('B')
 board.add_player(a)

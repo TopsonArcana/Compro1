@@ -7,8 +7,8 @@ class Ball:
         self.size = size
         self.x = x
         self.y = y
-        self.vx = random.randint(1, 0.025* screen.canvas_width)
-        self.vy = random.randint(1, 0.025* screen.canvas_width)
+        self.vx = random.randint(1, 0.025 * screen.canvas_width)
+        self.vy = random.randint(1, 0.025 * screen.canvas_width)
         self.color = color
 
     def draw_circle(self):

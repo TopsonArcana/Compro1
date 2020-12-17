@@ -64,12 +64,15 @@ class Bus:
 
     def start(self):
         self.__start = current_time()
+        return self.__start
 
     def elapse_time(self):
         self.__present_time = int(current_time() - self.__start)
+        return self.__present_time
 
     def final_time(self):
         self.__total_time = int(current_time() - self.__start)
+        return self.__total_time
 
     @property
     def bus_code(self):

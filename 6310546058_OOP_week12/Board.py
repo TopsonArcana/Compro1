@@ -17,6 +17,7 @@ class Board:
         self.__width = int(f.readline().strip())
         self.__length = int(f.readline().strip())
         for i in f.readlines():
+            i.strip()
             celllist.append(Cell(i.split(",")[0], i.split(",")[1], i.split(",")[2].strip()))
         return celllist
 
@@ -43,6 +44,7 @@ class Board:
             pass
         else:
             self.access_cell(player.current_pos).remove_occupy_list(player)
+
             player.move(self)
             player.obtain_cell_status(self)
             self.access_cell(player.current_pos).add_occupy_list(player)
@@ -53,31 +55,40 @@ class Board:
             if (row % 2) == 0:
                 display.append("- - - - - - -  " * self.__width)
                 display.append("".join([f"|      {i.id:3}     |"
-                                if self.__cell_list.index(i) == (row + 1) * (len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
-                                else f"|      {i.id:3}     "
-                                for i in self.__cell_list[self.__width * row:self.__width * (row + 1)]]))
+                                        if self.__cell_list.index(i) == (row + 1) * (
+                    len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
+                                        else f"|      {i.id:3}     "
+                                        for i in self.__cell_list[self.__width * row:self.__width * (row + 1)]]))
                 display.append("".join([f"|   {i.move:3},{i.hold:5}  |"
-                                if self.__cell_list.index(i) == (row + 1) * (len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
-                                else f"|   {i.move:3},{i.hold:5}  "
-                                for i in self.__cell_list[self.__width * row:self.__width * (row + 1)]]))
+                                        if self.__cell_list.index(i) == (row + 1) * (
+                    len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
+                                        else f"|   {i.move:3},{i.hold:5}  "
+                                        for i in self.__cell_list[self.__width * row:self.__width * (row + 1)]]))
                 display.append("".join([f"|      {i.get_occupy_list_str():3}     |"
-                                if self.__cell_list.index(i) == (row + 1) * (len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
-                                else f"|     {i.get_occupy_list_str():6}   "
-                                for i in self.__cell_list[self.__width * row:self.__width * (row + 1)]]))
+                                        if self.__cell_list.index(i) == (row + 1) * (
+                    len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
+                                        else f"|     {i.get_occupy_list_str():6}   "
+                                        for i in self.__cell_list[self.__width * row:self.__width * (row + 1)]]))
             else:
                 display.append("- - - - - - -  " * self.__width)
                 display.append("".join(reversed([f"|      {i.id:3}     |"
-                                if self.__cell_list.index(i) == (row + 1) * (len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
-                                else f"      {i.id:3}     |"
-                                for i in self.__cell_list[self.__width * row:self.__width * (row + 1)]])))
+                                                 if self.__cell_list.index(i) == (row + 1) * (
+                    len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
+                                                 else f"      {i.id:3}     |"
+                                                 for i in
+                                                 self.__cell_list[self.__width * row:self.__width * (row + 1)]])))
                 display.append("".join(reversed([f"|   {i.move:3},{i.hold:5}  |"
-                                if self.__cell_list.index(i) == (row + 1) * (len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
-                                else f"   {i.move:3},{i.hold:5}  |"
-                                for i in self.__cell_list[self.__width * row:self.__width * (row + 1)]])))
+                                                 if self.__cell_list.index(i) == (row + 1) * (
+                    len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
+                                                 else f"   {i.move:3},{i.hold:5}  |"
+                                                 for i in
+                                                 self.__cell_list[self.__width * row:self.__width * (row + 1)]])))
                 display.append("".join(reversed([f"|      {i.get_occupy_list_str():3}     |"
-                                if self.__cell_list.index(i) == (row + 1) * (len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
-                                else f"     {i.get_occupy_list_str():6}   |"
-                                for i in self.__cell_list[self.__width * row:self.__width * (row + 1)]])))
-        if row == self.__length - 1:
-            display.append(" - - - - - - - " * self.__width)
+                                                 if self.__cell_list.index(i) == (row + 1) * (
+                    len(self.__cell_list[self.__width * row:self.__width * (row + 1)])) - 1
+                                                 else f"{i.get_occupy_list_str():^14}|"
+                                                 for i in
+                                                 self.__cell_list[self.__width * row:self.__width * (row + 1)]])))
+            if row == self.__length - 1:
+                display.append(" - - - - - - - " * self.__width)
         return "\n".join(display)

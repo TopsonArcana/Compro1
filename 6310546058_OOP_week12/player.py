@@ -21,6 +21,9 @@ class Player:
     def current_move(self):
         return self.__current_move
 
+    @current_move.setter
+    def current_move(self,value):
+        self.__current_move += value
     def __str__(self):
         return "{0}: Pos = {1}: Hold = {2}: Move = {3}".format(self.__name, self.__current_pos, self.current_hold,
                                                                self.current_move)

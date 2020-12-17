@@ -25,6 +25,10 @@ class Player:
 
     def check(self, guess, game):
         """Check and show how many guesses made correct
+        Args:
+            guess (number string),game(Game() Object)
+        Returns:
+            string: String of progress made by players
         >>> p = Player()
         >>> g = Game()
         >>> len(g.number)

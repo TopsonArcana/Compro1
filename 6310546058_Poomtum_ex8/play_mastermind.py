@@ -3,7 +3,7 @@ from mastermind import *
 game = Game()
 player = Player()
 round = 1
-
+game.number = "1111"
 while True:
     number = input("What is your guess?: ")
     print(f"Your guess is {number}")

@@ -11,6 +11,7 @@ class Player():
         self.player_hand = []
         self.player_hand_value = 0
         self.player_hand_status = ""
+        self.player_points = 0
 
 
 class Blackjack:
@@ -22,6 +23,7 @@ class Blackjack:
         deck.shuffle()
         self.bj_deck = deck
         self.players = [Player() for i in range(2)]
+        self.computer = Player()
 
     def start(self):
         """Start game and set up players hand and value
@@ -39,6 +41,10 @@ class Blackjack:
 
     @staticmethod
     def status_update(player):
+        """Update status of a player whether they've to draw or they can stay
+        Args:
+            player(object): [Player of blackjack game]
+        """
         if player.player_hand_value < 16:
             player.player_hand_status = "must_draw_more"
         else:
@@ -46,6 +52,11 @@ class Blackjack:
 
     @staticmethod
     def value_cal(player):
+        """Calculate the value of player hand
+
+        Args:
+            player (object): [Player of blackjack game]
+        """
         ace = 0
         player.player_hand_value = 0
         for i in player.player_hand:
@@ -60,21 +71,39 @@ class Blackjack:
 
     @staticmethod
     def ace_cal(player, num_ace):
+        """Calculate whether ace should be 1 or 11
+
+        Args:
+            player (object): [Player of blackjack game]
+            num_ace (int): [number of ace]
+        """
         while num_ace > 0:
             if player.player_hand_value + 10 <= 21:
                 player.player_hand_value += 10
             num_ace -= 1
 
-    def adjust_player_hand(self,player):
+    def adjust_player_hand(self, player):
+        """Draw additional card and reevaluate value
+
+        Args:
+            player (object): [Player of blackjack game]
+        """
         player.player_hand.extend(self.bj_deck.draw_cards(1))
         Blackjack.value_cal(player)
         Blackjack.status_update(player)
 
     @staticmethod
     def display_player_hand(player):
+        """Print player hand
+
+        Args:
+            player (object): [Player of blackjack game]
+        """
         print(" ".join(player.player_hand))
 
     def decision(self):
+        """This method makes a decision if the player wins, looses, or ties with the computer
+        """
         if (self.players[0].player_hand_value > 21) and (self.players[1].player_hand_value < 21):
             print("Player 2 win")
         elif (self.players[0].player_hand_value < 21) and (self.players[1].player_hand_value > 21):

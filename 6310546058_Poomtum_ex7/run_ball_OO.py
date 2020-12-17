@@ -11,12 +11,13 @@ numball = int(input("Number of balls to simulate: "))
 ballist = [Ball(screen.ball_radius,
                 random.randint(-1 * screen.canvas_width + screen.ball_radius, screen.canvas_width - screen.ball_radius),
                 random.randint(-1 * screen.canvas_width + screen.ball_radius, screen.canvas_width - screen.ball_radius),
-                (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)), screen) for i in
-           range(numball)]
+                (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
+                screen)
+           for i in range(numball)]
+
 while True:
     turtle.clear()
-    for i in ballist:
-        i.draw_circle()
-        i.move_circle(screen)
-
+    for ball in ballist:
+        ball.draw_circle()
+        ball.move_circle(screen)
     turtle.update()
